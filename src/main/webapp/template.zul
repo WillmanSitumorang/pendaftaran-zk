@@ -1,28 +1,28 @@
-<?page title="Template Layout" contentType="text/html;charset=UTF-8"?>
+<?page title="Student Management System" contentType="text/html;charset=UTF-8"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
 
 
-    <borderlayout width="100%" height="100%">
+        <borderlayout width="100%" height="100%">
 
-        <!-- Header -->
-        <north size="60px" border="normal" style="background:#FBAED2; padding:10px">
-            <label value="Sistem Pendaftaran" style="font-size:18px; font-weight:bold" />
-        </north>
+            <!-- Header -->
+            <north size="60px" border="normal" style="background:#FBAED2;padding:10px">
+                <label value="Sistem Manajemen Mahasiswa" style="font-size:18px; font-weight:bold" />
+            </north>
 
-        <!-- Sidebar -->
-        <west size="180px" border="normal" collapsible="true" title="Menu">
-            <vlayout>
-                <button label="Beranda" style="background:#FF0090;" />
-                <button label="Pendaftaran" style="background:#FF0090;" />
-                <button label="Data Mahasiswa" style="background:#FF0090;" />
-            </vlayout>
-        </west>
+            <!-- Sidebar -->
+            <west size="180px" border="normal" collapsible="true" title="Menu">
+                <vlayout>
+                    <button label="Beranda" style="background:#FF0090;" />
+                    <button label="Pendaftaran" style="background:#FF0090;" />
+                    <button label="Data Mahasiswa" style="background:#FF0090;" />
+                </vlayout>
+            </west>
 
-        <!-- Main Content -->
-        <center border="normal" title="Data Pendaftar">
-            <div self="@insert(content)" />
-        </center>
+            <!-- Main Content -->
+            <center border="normal" title="Data Mahasiswa">
+                <div self="@insert(content)"/>
+            </center>
 
-    </borderlayout>
+        </borderlayout>
 
 </zk>

@@ -1,0 +1,59 @@
+<?page title="Student Management" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="template.zul"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+
+    <window width="100%" height="100%" viewModel="@id('controller') @init('pendaftaran.controller.StudentController')" self="@define(content)">
+
+        <vlayout spacing="10px" style="padding:10px">
+
+            <!-- Tabel Data Mahasiswa -->
+            <grid model="@bind(controller.students)" width="100%">
+                <columns>
+                    <column label="Nama" hflex="1" style="background:#FF0090;" />
+                    <column label="Jurusan" hflex="1" style="background:#FF0090;" />
+                    <column label="Alamat" hflex="2" style="background:#FF0090;" />
+                    <column label="Aksi" hflex="1" style="background:#FF0090;" />
+                </columns>
+                <template name="model" var="student">
+                    <row>
+                        <label value="@bind(student.name)" />
+                        <label value="@bind(student.jurusan)" />
+                        <label value="@bind(student.address)" />
+                        <hlayout spacing="10px">
+                            <button label="Edit" onClick="@command('editStudent', student=student)" style="background:#FF0090;" />
+                            <button label="Hapus" onClick="@command('deleteStudent', student=student)" style="background:#FF0090;" />
+                        </hlayout>
+                    </row>
+                </template>
+            </grid>
+
+            <!-- Form Input Data Mahasiswa -->
+            <groupbox mold="3d" width="100%">
+                <caption label="Input Data Mahasiswa" />
+                <grid width="100%">
+                    <rows>
+                        <row>
+                            <label value="Nama:" width="100px" />
+                            <textbox value="@bind(controller.name)" width="250px" />
+                        </row>
+                        <row>
+                            <label value="Jurusan:" width="100px" />
+                            <textbox value="@bind(controller.jurusan)" width="250px" />
+                        </row>
+                        <row>
+                            <label value="Alamat:" width="100px" />
+                            <textbox value="@bind(controller.address)" width="250px" />
+                        </row>
+                        <row>
+                            <cell colspan="2">
+                                <button label="@bind(controller.buttonLabel)" onClick="@command('saveStudent')" style="background:#FF0090;" />
+                            </cell>
+                        </row>
+                    </rows>
+                </grid>
+            </groupbox>
+
+        </vlayout>
+    </window>
+
+</zk>
