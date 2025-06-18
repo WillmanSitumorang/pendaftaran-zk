@@ -6,12 +6,14 @@
     <grid model="@bind(vm.students)" width="100%">
         <columns>
             <column label="Nama" hflex="1" style="background:#FF0090;" />
+            <column label="Jurusan" hflex="1" style="background:#FF0090;" />
             <column label="Alamat" hflex="2" style="background:#FF0090;" />
             <column label="Aksi" hflex="1" style="background:#FF0090;" />
         </columns>
         <template name="model" var="student">
             <row>
                 <label value="@bind(student.name)" />
+                <label value="@bind(student.jurusan)" />
                 <label value="@bind(student.address)" />
                 <hlayout spacing="10px">
                     <button label="Edit" onClick="@command('editStudent', student=student)" style="background:#FF0090;" />
@@ -29,6 +31,10 @@
                 <row>
                     <label value="Nama:" width="100px" />
                     <textbox value="@bind(vm.name)" width="250px" />
+                </row>
+                <row>
+                    <label value="Jurusan:" width="100px" />
+                    <textbox value="@bind(vm.jurusan)" width="250px" />
                 </row>
                 <row>
                     <label value="Alamat:" width="100px" />
