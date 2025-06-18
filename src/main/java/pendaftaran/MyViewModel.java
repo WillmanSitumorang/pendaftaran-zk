@@ -13,6 +13,7 @@ public class MyViewModel {
 
     private String name;
     private String address;
+    private String jurusan;
 	
     private List<Student> students;
     private Student selectedStudent;
@@ -27,26 +28,29 @@ public class MyViewModel {
     @Command
     @NotifyChange({"students", "name", "address", "selectedStudent"})
     public void saveStudent() {
-        if (name != null && !name.isEmpty() && address != null && !address.isEmpty()) {
+        if (name != null && !name.isEmpty() && address != null && !address.isEmpty() && jurusan != null && !jurusan.isEmpty()) {
             if (selectedStudent != null) {
                 // Update mode
                 selectedStudent.setName(name);
                 selectedStudent.setAddress(address);
+                selectedStudent.setJurusan(jurusan);
                 selectedStudent = null;
             } else {
                 // Insert mode
-                students.add(new Student(idGenerator.getAndIncrement(), name, address));
+                students.add(new Student(idGenerator.getAndIncrement(), name, address, jurusan));
             }
             name = "";
             address = "";
+            jurusan = "";
         }
     }
 
     @Command
-    @NotifyChange({"name", "address", "selectedStudent"})
+    @NotifyChange({"name", "address", "selectedStudent", "jurusan"})
     public void editStudent(@BindingParam("student") Student student) {
         this.name = student.getName();
         this.address = student.getAddress();
+        this.jurusan = student.getJurusan();
         this.selectedStudent = student;
     }
 
@@ -73,6 +77,14 @@ public class MyViewModel {
         this.address = address;
     }
 
+    public String getJurusan() {
+        return jurusan;
+    }
+    
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
+
     public List<Student> getStudents() {
         return students;
     }
@@ -89,18 +101,21 @@ public class MyViewModel {
         this.selectedStudent = selectedStudent;
     }
 
+
     // Inner class Student
     public static class Student {
         private int id;
         private String name;
         private String address;
+        private String jurusan;
 
         public Student() {}
 
-        public Student(int id, String name, String address) {
+        public Student(int id, String name, String address, String jurusan) {
             this.id = id;
             this.name = name;
             this.address = address;
+            this.jurusan = jurusan;
         }
 
         // Getters & Setters
@@ -127,6 +142,9 @@ public class MyViewModel {
         public void setAddress(String address) {
             this.address = address;
         }
+        public String getJurusan() {return jurusan;}
+
+        public void setJurusan(String jurusan) {this.jurusan = jurusan;}
 
         // Agar .remove() berfungsi
         @Override
