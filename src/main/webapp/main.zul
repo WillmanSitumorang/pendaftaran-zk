@@ -1,0 +1,47 @@
+<?page title="Main Content" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<vlayout spacing="10px" style="padding:10px">
+
+    <!-- Tabel Data -->
+    <grid model="@bind(vm.students)" width="100%">
+        <columns>
+            <column label="Nama" hflex="1" style="background:#FF0090;" />
+            <column label="Alamat" hflex="2" style="background:#FF0090;" />
+            <column label="Aksi" hflex="1" style="background:#FF0090;" />
+        </columns>
+        <template name="model" var="student">
+            <row>
+                <label value="@bind(student.name)" />
+                <label value="@bind(student.address)" />
+                <hlayout spacing="10px">
+                    <button label="Edit" onClick="@command('editStudent', student=student)" style="background:#FF0090;" />
+                    <button label="Hapus" onClick="@command('deleteStudent', student=student)" style="background:#FF0090;" />
+                </hlayout>
+            </row>
+        </template>
+    </grid>
+
+    <!-- Form Input -->
+    <groupbox mold="3d" width="100%">
+        <caption label="Input Data" />
+        <grid width="100%">
+            <rows>
+                <row>
+                    <label value="Nama:" width="100px" />
+                    <textbox value="@bind(vm.name)" width="250px" />
+                </row>
+                <row>
+                    <label value="Alamat:" width="100px" />
+                    <textbox value="@bind(vm.address)" width="250px" />
+                </row>
+                <row>
+                    <cell colspan="2">
+                        <button label="Simpan" onClick="@command('saveStudent')" style="background:#FF0090;" />
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </groupbox>
+
+</vlayout>
+</zk>
