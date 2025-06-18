@@ -14,6 +14,10 @@ public class MyViewModel {
     private String name;
     private String address;
     private String jurusan;
+
+	public String getButtonLabel() {
+		return selectedStudent != null ? "Update" : "Simpan";
+	}
 	
     private List<Student> students;
     private Student selectedStudent;

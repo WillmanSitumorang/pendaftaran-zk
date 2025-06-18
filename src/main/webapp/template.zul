@@ -1,11 +1,11 @@
-<?page title="ZK Template Layout" contentType="text/html;charset=UTF-8"?>
+<?page title="Template Layout" contentType="text/html;charset=UTF-8"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
-<window width="100%" height="100%" viewModel="@id('vm') @init('pendaftaran.MyViewModel')">
+
 
     <borderlayout width="100%" height="100%">
 
         <!-- Header -->
-        <north size="60px" border="normal" style="background:#FBAED2;padding:10px">
+        <north size="60px" border="normal" style="background:#FBAED2; padding:10px">
             <label value="Sistem Pendaftaran" style="font-size:18px; font-weight:bold" />
         </north>
 
@@ -20,9 +20,9 @@
 
         <!-- Main Content -->
         <center border="normal" title="Data Pendaftar">
-            <include src="main.zul" />
+            <div self="@insert(content)" />
         </center>
 
     </borderlayout>
-</window>
+
 </zk>
