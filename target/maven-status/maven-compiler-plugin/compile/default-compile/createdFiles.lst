@@ -1,0 +1,4 @@
+pendaftaran\model\StudentModel$Student.class
+pendaftaran\controller\StudentController.class
+pendaftaran\service\StudentService.class
+pendaftaran\model\StudentModel.class
