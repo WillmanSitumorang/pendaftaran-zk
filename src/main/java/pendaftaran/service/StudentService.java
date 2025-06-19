@@ -1,8 +1,8 @@
 package pendaftaran.service;
 
-import pendaftaran.model.StudentModel;
-
 import java.util.List;
+
+import pendaftaran.entity.StudentModel;
 
 public class StudentService {
 

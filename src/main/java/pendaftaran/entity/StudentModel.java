@@ -1,4 +1,4 @@
-package pendaftaran.model;
+package pendaftaran.entity;
 
 import java.util.ArrayList;
 import java.util.List;

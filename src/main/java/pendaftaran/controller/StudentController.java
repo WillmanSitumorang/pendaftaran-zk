@@ -5,8 +5,8 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zul.Messagebox;
 
+import pendaftaran.entity.StudentModel;
 import pendaftaran.service.StudentService;
-import pendaftaran.model.StudentModel;
 
 import java.util.List;
 
