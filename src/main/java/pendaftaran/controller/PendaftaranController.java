@@ -4,6 +4,7 @@ import pendaftaran.model.Student;
 import pendaftaran.service.PendaftaranService;
 import org.zkoss.zk.ui.select.annotation.*;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.*;
@@ -23,6 +24,7 @@ public class PendaftaranController extends SelectorComposer<Component> {
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
+        Selectors.wireComponents(comp, this, false);
         refreshList();
     }
 
@@ -76,7 +78,7 @@ public class PendaftaranController extends SelectorComposer<Component> {
 
         // Tombol Edit
         Button editBtn = new Button("Edit");
-        editBtn.setStyle("margin-right: 5px");
+        editBtn.setStyle("margin-right: 5px;background:#FF0090" );
         editBtn.addEventListener("onClick", e -> {
             selectedStudent = s;
             nameBox.setValue(s.getName());
@@ -87,6 +89,7 @@ public class PendaftaranController extends SelectorComposer<Component> {
 
         // Tombol Hapus
         Button deleteBtn = new Button("Hapus");
+        deleteBtn.setStyle("background:#FF0090");
         deleteBtn.addEventListener("onClick", e -> {
             service.deleteStudent(s);
             refreshList();
