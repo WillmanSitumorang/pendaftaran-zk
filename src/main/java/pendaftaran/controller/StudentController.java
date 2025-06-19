@@ -3,6 +3,8 @@ package pendaftaran.controller;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zul.Messagebox;
+
 import pendaftaran.service.StudentService;
 import pendaftaran.model.StudentModel;
 
@@ -17,14 +19,13 @@ public class StudentController {
     private StudentModel.Student selectedStudent;
 
     public StudentController() {
-        studentService = new StudentService();  // Menghubungkan Controller dengan Service
+        studentService = new StudentService();  // Hubungkan Controller dengan Service
     }
 
-    // Getter and Setter for name, address, and jurusan
+    // Getter dan Setter
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -32,7 +33,6 @@ public class StudentController {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -40,30 +40,48 @@ public class StudentController {
     public String getJurusan() {
         return jurusan;
     }
-
     public void setJurusan(String jurusan) {
         this.jurusan = jurusan;
     }
 
-    // Command untuk menyimpan atau mengedit data mahasiswa
+    // Method untuk cek apakah nama sudah ada (kecuali yang sedang diedit)
+    private boolean isDuplicateName(String name) {
+        return studentService.getAllStudents().stream()
+                .anyMatch(s -> s.getName().trim().equalsIgnoreCase(name.trim()) && s != selectedStudent);
+    }
+
+    // Command untuk Simpan atau Update Mahasiswa
     @Command
     @NotifyChange({"students", "name", "address", "jurusan"})
     public void saveStudent() {
-        if (name != null && !name.isEmpty() && address != null && !address.isEmpty() && jurusan != null && !jurusan.isEmpty()) {
+        if (name != null && !name.isEmpty() &&
+            address != null && !address.isEmpty() &&
+            jurusan != null && !jurusan.isEmpty()) {
+
+            if (isDuplicateName(name)) {
+                Messagebox.show("Nama sudah terdaftar!", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
+                return;
+            }
+
             if (selectedStudent != null) {
-                studentService.editStudent(selectedStudent, name, address, jurusan); // Edit student via Service
+                studentService.editStudent(selectedStudent, name, address, jurusan); // Edit
                 selectedStudent = null;
             } else {
-                studentService.addStudent(name, address, jurusan); // Add student via Service
+                studentService.addStudent(name, address, jurusan); // Tambah
             }
+
+            // Reset form
             name = "";
             address = "";
             jurusan = "";
+
+        } else {
+            Messagebox.show("Semua field harus diisi!", "Peringatan", Messagebox.OK, Messagebox.EXCLAMATION);
         }
     }
 
     @Command
-    @NotifyChange({"name", "address", "selectedStudent", "jurusan"})
+    @NotifyChange({"name", "address", "jurusan", "selectedStudent"})
     public void editStudent(@BindingParam("student") StudentModel.Student student) {
         this.name = student.getName();
         this.address = student.getAddress();
@@ -74,11 +92,11 @@ public class StudentController {
     @Command
     @NotifyChange("students")
     public void deleteStudent(@BindingParam("student") StudentModel.Student student) {
-        studentService.deleteStudent(student); // Delete student via Service
+        studentService.deleteStudent(student);
     }
 
     public List<StudentModel.Student> getStudents() {
-        return studentService.getAllStudents(); // Get students from Service
+        return studentService.getAllStudents();
     }
 
     public String getButtonLabel() {
