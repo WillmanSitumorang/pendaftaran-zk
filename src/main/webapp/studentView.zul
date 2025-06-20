@@ -7,13 +7,6 @@
 
         <vlayout spacing="10px" style="padding:10px; overflow:auto; height:100%"> 
 
-            <hbox align="center" hflex="1">
-				Log message: <textbox value="@save(vm.message)"
-					onOK="@command('addLog')" hflex="1" placeholder="What happened?" />
-				<button label="add" onClick="@command('addLog')" />
-				<a href="/logout" label="Logout"/>
-			</hbox>
-
             <!-- Form Input Data Mahasiswa -->
             <groupbox mold="3d" width="100%" closable="false">
                 <caption label="Input Data Mahasiswa" style="background:#FBAED2;color:#000000;font-weight:bold;" />
