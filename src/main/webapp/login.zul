@@ -1,26 +1,39 @@
-<zk xmlns:h="native">
-    <window title="Login" border="normal" width="300px" height="500px" closable="false" position="center">
-        <vlayout spacing="10px" hflex="min" vflex="min">
-            <label value="Please login:"/>
-            <!-- Use h:form to render native HTML form -->
-            <h:form action="${pageContext.request.contextPath}/login.zul" method="POST">
+<?page title="Student Management System" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml">
+
+    <!-- Login Window centered and wider -->
+    <window title="Login" border="normal" width="50%" height="400px" closable="false" position="center"
+            style="display: block; margin: auto; margin-top: 100px; background-color: #fbe3ef;">
+
+        <!-- Wrapper for styling and layout -->
+        <vlayout spacing="20px" style="background:#fff; padding:20px; border-radius:10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); width:100%; max-width: 600px; margin:auto;">
+
+            <!-- Page Title -->
+            <label value="Please login:" style="font-size:18px; font-weight:bold; color:#FF0090; text-align:center;"/>
+
+            <!-- Form using h:form -->
+            <h:form action="${pageContext.request.contextPath}/login.zul" method="post">
                 <grid>
                     <rows>
                         <row>
-                            <label value="Username:"/>
-                            <textbox name="username" hflex="1" placeholder="Enter username"/>
+                            <label value="Username:" style="color:#FF0090;"/>
+                            <textbox name="username" hflex="1" placeholder="Masukkan username" style="border-radius:5px; border:1px solid #FF0090; padding:5px;"/>
                         </row>
                         <row>
-                            <label value="Password:"/>
-                            <textbox  name="password" type="password" hflex="1" placeholder="Enter password"/>
+                            <label value="Password:" style="color:#FF0090;"/>
+                            <textbox name="password" type="password" hflex="1" placeholder="Masukkan password" style="border-radius:5px; border:1px solid #FF0090; padding:5px;"/>
                         </row>
                         <row>
-                            <button type="submit" label="Login" width="100%"/>
+                            <button type="submit" label="Login" style="background:#FF0090; color:white; font-weight:bold; border-radius:5px; padding:10px 0;" width="100%"/>
                         </row>
                     </rows>
                 </grid>
             </h:form>
-            <label value="Invalid username or password" style="color: red;" visible="${param.error != null}"/>
+
+            <!-- Error Message if invalid username/password -->
+            <label value="Invalid username or password" style="color:red;" visible="${param.error != null}" />
+
         </vlayout>
     </window>
+
 </zk>
