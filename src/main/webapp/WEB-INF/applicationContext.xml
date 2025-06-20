@@ -10,8 +10,27 @@
         http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
  
- 	<context:component-scan base-package="com.fif" />
- 	
+ 	<context:component-scan base-package="com.fif,pendaftaran" />
+
+    <!-- datasource for Flyway database -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/pendaftaran_db"/>
+        <property name="username" value="admin"/>
+        <property name="password" value="secret"/>
+    </bean>
+
+    <!-- initiate bean for FlywayDB -->
+    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" depends-on="dataSource">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="baselineOnMigrate" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:db/migration</value>
+            </list>
+        </property>
+    </bean>
+
  	<!-- jpa(hibernate) configuration -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="myapp"/>

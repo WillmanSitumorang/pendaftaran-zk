@@ -1,0 +1,9 @@
+
+CREATE TABLE IF NOT EXISTS students (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    address VARCHAR(255) NOT NULL,
+    jurusan VARCHAR(100) NOT NULL
+);
+
+

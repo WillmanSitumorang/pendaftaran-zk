@@ -1,30 +1,12 @@
 package pendaftaran.service;
 
+import pendaftaran.entity.Student;
 import java.util.List;
 
-import pendaftaran.entity.StudentModel;
-
-public class StudentService {
-
-    private StudentModel studentModel;
-
-    public StudentService() {
-        studentModel = new StudentModel(); // Inisialisasi Model
-    }
-
-    public void addStudent(String name, String address, String jurusan) {
-        studentModel.addStudent(name, address, jurusan);
-    }
-
-    public void editStudent(StudentModel.Student student, String name, String address, String jurusan) {
-        studentModel.editStudent(student, name, address, jurusan);
-    }
-
-    public void deleteStudent(StudentModel.Student student) {
-        studentModel.deleteStudent(student);
-    }
-
-    public List<StudentModel.Student> getAllStudents() {
-        return studentModel.getStudents();
-    }
+public interface StudentService {
+    Student save(String name, String address, String jurusan);
+    Student update(Student student, String name, String address, String jurusan);
+    void delete(Student student);
+    List<Student> getAll();
+    boolean isDuplicateName(String name, Student except);
 }
